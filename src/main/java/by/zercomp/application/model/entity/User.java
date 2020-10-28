@@ -11,7 +11,8 @@ public class User extends Identifiable {
     private String lastName;
     private LocalDate birth;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String login, String email, String firstName, String lastName, LocalDate birth) {
         this.login = login;
@@ -101,5 +102,18 @@ public class User extends Identifiable {
         result = prime * result + (getLastName() != null ? getLastName().hashCode() : 0);
         result = prime * result + (getBirth() != null ? getBirth().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("role='").append(role).append('\'');
+        sb.append(", login='").append(login).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", birth=").append(birth);
+        sb.append('}');
+        return sb.toString();
     }
 }
