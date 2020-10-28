@@ -81,13 +81,21 @@ public class User extends Identifiable {
         if (!super.equals(o)) return false;
 
         User user = (User) o;
-        if (getRole() != user.getRole()) return false;
-        if (getLogin() != null ? !getLogin().equals(user.getLogin()) : user.getLogin() != null) return false;
-        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
-        if (getFirstName() != null ? !getFirstName().equals(user.getFirstName()) : user.getFirstName() != null)
+        if (getRole() != user.getRole()) {
             return false;
-        if (getLastName() != null ? !getLastName().equals(user.getLastName()) : user.getLastName() != null)
+        }
+        if (getLogin() != null ? !getLogin().equals(user.getLogin()) : user.getLogin() != null) {
             return false;
+        }
+        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) {
+            return false;
+        }
+        if (getFirstName() != null ? !getFirstName().equals(user.getFirstName()) : user.getFirstName() != null) {
+            return false;
+        }
+        if (getLastName() != null ? !getLastName().equals(user.getLastName()) : user.getLastName() != null) {
+            return false;
+        }
         return getBirth() != null ? getBirth().equals(user.getBirth()) : user.getBirth() == null;
     }
 
