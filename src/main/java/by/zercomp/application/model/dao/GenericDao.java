@@ -6,4 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 public class GenericDao<T extends Identifiable> {
     private static final Logger log = LogManager.getLogger(GenericDao.class);
+
+    protected GenericDao() {
+    }
+
+
 }
