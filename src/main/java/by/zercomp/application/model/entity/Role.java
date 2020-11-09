@@ -1,5 +1,5 @@
 package by.zercomp.application.model.entity;
 
 public enum Role {
-    ADMIN, CLIENT, VIP_CLIENT;
+    ADMIN, СUSTOMER, VIP;
 }
