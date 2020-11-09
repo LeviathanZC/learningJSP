@@ -6,15 +6,21 @@ public class Product extends Identifiable {
     private String description;
     private long price;
     private Category category;
+    private int quantity;
+    private Model model;
+    private Brand brand;
 
     public Product() {
     }
 
-    public Product(String name, String description, long price, Category category) {
+    public Product(String name, String description, long price, Category category, int quantity, Model model, Brand brand) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
+        this.quantity = quantity;
+        this.brand = brand;
+        this.model = model;
     }
 
     public String getName() {
@@ -49,6 +55,30 @@ public class Product extends Identifiable {
         this.category = category;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -64,10 +94,14 @@ public class Product extends Identifiable {
         Product product = (Product) o;
 
         if (getPrice() != product.getPrice()) return false;
+        if (getQuantity() != product.getQuantity()) return false;
         if (getName() != null ? !getName().equals(product.getName()) : product.getName() != null) return false;
         if (getDescription() != null ? !getDescription().equals(product.getDescription()) : product.getDescription() != null)
             return false;
-        return getCategory() != null ? getCategory().equals(product.getCategory()) : product.getCategory() == null;
+        if (getCategory() != null ? !getCategory().equals(product.getCategory()) : product.getCategory() != null)
+            return false;
+        if (getModel() != null ? !getModel().equals(product.getModel()) : product.getModel() != null) return false;
+        return getBrand() != null ? getBrand().equals(product.getBrand()) : product.getBrand() == null;
     }
 
     @Override
@@ -78,6 +112,24 @@ public class Product extends Identifiable {
         result = prime * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = prime * result + (int) (getPrice() ^ (getPrice() >>> 32));
         result = prime * result + (getCategory() != null ? getCategory().hashCode() : 0);
+        result = prime * result + getQuantity();
+        result = prime * result + (getModel() != null ? getModel().hashCode() : 0);
+        result = prime * result + (getBrand() != null ? getBrand().hashCode() : 0);
+        result = prime * result + prime;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder("Product{");
+        builder.append("name='").append(this.name).append('\'');
+        builder.append(", description='").append(description).append('\'');
+        builder.append(", price=").append(price).append('\'');
+        builder.append(", category=").append(category).append('\'');
+        builder.append(", quantity=").append(quantity).append('\'');
+        builder.append(", model=").append(model).append('\'');
+        builder.append(", brand=").append(brand).append('\'');
+        builder.append('}');
+        return builder.toString();
     }
 }
