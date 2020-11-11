@@ -35,4 +35,7 @@ public class GenericDao<T extends Identifiable> {
         }
     }
 
+    protected void executeUpdate(String query, Connection connection, Object... params) {
+
+    }
 }
