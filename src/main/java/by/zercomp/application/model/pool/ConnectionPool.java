@@ -59,6 +59,16 @@ public class ConnectionPool {
         givenAwayConnections.remove(connection);
         freeConnection.add(connection);
     }
+
+    public void destroyPool() {
+        for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
+            try {
+                freeConnection.take().close();
+            } catch (InterruptedException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /*public static void main(String[] args) {
         Properties prop = new Properties();
         prop.put("user", "root");
