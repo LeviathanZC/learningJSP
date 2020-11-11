@@ -3,6 +3,8 @@ package by.zercomp.application.model.pool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayDeque;
@@ -32,7 +34,13 @@ public class ConnectionPool {
         freeConnection = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
         givenAwayConnections = new ArrayDeque<>();
         Properties prop = new Properties();
-        prop.load(getClass().getClassLoader().getResourceAsStream(CONNECTION_PROPERTIES_FILE));
+        InputStream stream = getClass().getClassLoader().getResourceAsStream(CONNECTION_PROPERTIES_FILE);
+        try {
+            prop.load(stream);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /*public static void main(String[] args) {
