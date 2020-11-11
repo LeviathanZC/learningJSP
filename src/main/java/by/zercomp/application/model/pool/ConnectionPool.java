@@ -43,6 +43,17 @@ public class ConnectionPool {
         }
     }
 
+    public Connection getConnection() {
+        Connection connection = null;
+        try {
+            connection = freeConnection.take();
+            givenAwayConnections.offer(connection);
+        } catch (InterruptedException e) {
+            log.error("can't get connection : ", e);
+            Thread.currentThread().interrupt();
+        }
+        return connection;
+    }
     /*public static void main(String[] args) {
         Properties prop = new Properties();
         prop.put("user", "root");
