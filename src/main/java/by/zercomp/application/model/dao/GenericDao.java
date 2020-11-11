@@ -38,20 +38,20 @@ public class GenericDao<T extends Identifiable> {
         }
     }
 
-    protected void executeUpdate(String query, Connection connection, Object... params) {
+    protected void executeUpdate(String query, Connection connection, Object... params) throws DaoException {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(query);
             setParameters(ps, params);
             ps.executeUpdate();
-        } catch (SQLException throwables) {
+        } catch (SQLException e) {
             throw new DaoException("cannot execute update or get access to database : ", e);
         } finally {
             closeResource(ps);
         }
     }
 
-    protected void executeUpdate(String query, Object... params) {
+    protected void executeUpdate(String query, Object... params) throws DaoException {
         Connection connection = pool.getConnection();
         try {
             executeUpdate(query, connection, params);
