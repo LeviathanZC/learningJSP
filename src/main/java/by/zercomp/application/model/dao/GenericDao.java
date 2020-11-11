@@ -17,7 +17,13 @@ public class GenericDao<T extends Identifiable> {
 
     protected void startTransaction(Connection connection) throws SQLException {
         connection.setAutoCommit(false);
-        connection.setTransactionIsolation(connection.TRANSACTION_SERIALIZABLE);
+        connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+    }
+
+    protected void endTransaction(Connection connection) throws SQLException {
+        connection.commit();
+        connection.setAutoCommit(true);
+        connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
     }
 
 
