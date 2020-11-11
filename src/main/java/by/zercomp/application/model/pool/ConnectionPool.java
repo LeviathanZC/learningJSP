@@ -1,5 +1,6 @@
 package by.zercomp.application.model.pool;
 
+import by.zercomp.application.model.exception.ConnectionPoolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,6 +45,7 @@ public class ConnectionPool {
             }
         } catch (IOException | ClassNotFoundException | SQLException e) {
             log.fatal("cannot initialize ConnectionPool : ", e);
+            throw new ConnectionPoolException("cannot initialize ConnectionPool : ", e);
         }
     }
 
@@ -62,7 +64,7 @@ public class ConnectionPool {
     public void releaseConnection(Connection connection) {
         if (connection.getClass() == ProxyConnection.class) {
             givenAwayConnections.remove(connection);
-            freeConnection.add(connection);
+            freeConnection.add((ProxyConnection) connection);
         }
     }
 
