@@ -17,8 +17,8 @@ public class ConnectionPool {
     private static final String CONNECTION_PROPERTIES_FILE = "mysqlConnection.properties";
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/online_store";
     private static final int DEFAULT_POOL_SIZE = 32;
-    private final BlockingQueue<Connection> freeConnection;
-    private final Queue<Connection> givenAwayConnections;
+    private final BlockingQueue<ProxyConnection> freeConnection;
+    private final Queue<ProxyConnection> givenAwayConnections;
 
     private final Logger log = LogManager.getLogger(ConnectionPool.class);
 
@@ -44,7 +44,7 @@ public class ConnectionPool {
     }
 
     public Connection getConnection() {
-        Connection connection = null;
+        ProxyConnection connection = null;
         try {
             connection = freeConnection.take();
             givenAwayConnections.offer(connection);
@@ -56,14 +56,16 @@ public class ConnectionPool {
     }
 
     public void releaseConnection(Connection connection) {
-        givenAwayConnections.remove(connection);
-        freeConnection.add(connection);
+        if (connection.getClass() == ProxyConnection.class) {
+            givenAwayConnections.remove(connection);
+            freeConnection.add(connection);
+        }
     }
 
     public void destroyPool() {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
             try {
-                freeConnection.take().close();
+                freeConnection.take().  close();
             } catch (InterruptedException | SQLException e) {
                 e.printStackTrace();
             }
