@@ -51,6 +51,15 @@ public class GenericDao<T extends Identifiable> {
         }
     }
 
+    protected void executeUpdate(String query, Object... params) {
+        Connection connection = pool.getConnection();
+        try {
+            executeUpdate(query, connection, params);
+        } finally {
+            pool.releaseConnection(connection);
+        }
+    }
+
     protected void setParameters(PreparedStatement preparedStatement, Object... params) throws SQLException {
         for (int i = 0, paramIndex = 1; i < params.length; i++, paramIndex++) {
             if (params[i] != null) {
