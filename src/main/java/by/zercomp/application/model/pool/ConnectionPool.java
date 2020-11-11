@@ -9,14 +9,21 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 
 public class ConnectionPool {
-    public static final String CONNECTION_PROPERTIES_FILE = "mysqlConnection.properties";
-    public static final String URL = "jdbc:mysql://127.0.0.1:3306/online_store";
-    public static final int DEFAULT_POOL_SIZE = 32;
+    private static final String CONNECTION_PROPERTIES_FILE = "mysqlConnection.properties";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/online_store";
+    private static final int DEFAULT_POOL_SIZE = 32;
     private final BlockingQueue<Connection> freeConnection;
     private final Queue<Connection> givenAwayConnections;
 
     private final Logger log = LogManager.getLogger(ConnectionPool.class);
 
+    private static class PoolHolder {
+        private static final ConnectionPool POOL = new ConnectionPool();
+    }
+
+    public static ConnectionPool getInstance() {
+        return PoolHolder.POOL;
+    }
 
     /*public static void main(String[] args) {
         Properties prop = new Properties();
