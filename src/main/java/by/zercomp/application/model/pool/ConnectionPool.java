@@ -54,6 +54,11 @@ public class ConnectionPool {
         }
         return connection;
     }
+
+    public void releaseConnection(Connection connection) {
+        givenAwayConnections.remove(connection);
+        freeConnection.add(connection);
+    }
     /*public static void main(String[] args) {
         Properties prop = new Properties();
         prop.put("user", "root");
