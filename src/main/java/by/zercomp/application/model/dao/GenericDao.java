@@ -26,6 +26,13 @@ public class GenericDao<T extends Identifiable> {
         connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
     }
 
-
+    protected void cancelTransaction(Connection connection) {
+        try {
+            connection.rollback();
+            connection.setAutoCommit(true);
+        } catch (SQLException throwables) {
+            log.error("cannot rollback", throwables);
+        }
+    }
 
 }
