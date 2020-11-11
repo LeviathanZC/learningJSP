@@ -73,37 +73,9 @@ public class ConnectionPool {
             try {
                 freeConnection.take().  close();
             } catch (InterruptedException | SQLException e) {
-                e.printStackTrace();
+                log.error("cannot destroy ConnectionPool : ", e);
+                Thread.currentThread().interrupt();
             }
         }
     }
-    /*public static void main(String[] args) {
-        Properties prop = new Properties();
-        prop.put("user", "root");
-        prop.put("password", "pass");
-        prop.put("autoReconnect", "true");
-        prop.put("characterEncoding", "UTF-8");
-        prop.put("useUnicode", "true");
-
-        Connection cn = null;
-        try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            cn = DriverManager.getConnection(URL, "leviathan", "1591310486+");
-            try (Statement st = cn.createStatement()) {
-                ResultSet rs = st.executeQuery("SELECT email, pw_hash FROM users;");
-                System.out.println(rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }*/
 }
