@@ -3,10 +3,13 @@ package by.zercomp.application.model.pool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.InputStreamReader;
 import java.sql.*;
+import java.util.ArrayDeque;
 import java.util.Properties;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class ConnectionPool {
     private static final String CONNECTION_PROPERTIES_FILE = "mysqlConnection.properties";
@@ -23,6 +26,13 @@ public class ConnectionPool {
 
     public static ConnectionPool getInstance() {
         return PoolHolder.POOL;
+    }
+
+    private ConnectionPool() {
+        freeConnection = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
+        givenAwayConnections = new ArrayDeque<>();
+        Properties prop = new Properties();
+        prop.load(getClass().getClassLoader().getResourceAsStream(CONNECTION_PROPERTIES_FILE));
     }
 
     /*public static void main(String[] args) {
