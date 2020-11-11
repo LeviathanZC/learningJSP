@@ -17,6 +17,7 @@ public class ConnectionPool {
     private static final String CONNECTION_PROPERTIES_FILE = "mysqlConnection.properties";
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/online_store";
     private static final int DEFAULT_POOL_SIZE = 32;
+    private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     private final BlockingQueue<ProxyConnection> freeConnection;
     private final Queue<ProxyConnection> givenAwayConnections;
 
@@ -37,9 +38,12 @@ public class ConnectionPool {
         InputStream stream = getClass().getClassLoader().getResourceAsStream(CONNECTION_PROPERTIES_FILE);
         try {
             prop.load(stream);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            Class.forName(MYSQL_DRIVER);
+            for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
+                freeConnection.add(new ProxyConnection(DriverManager.getConnection(URL, prop)));
+            }
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            log.fatal("cannot initialize ConnectionPool : ", e);
         }
     }
 
