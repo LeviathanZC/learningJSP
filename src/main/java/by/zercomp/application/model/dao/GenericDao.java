@@ -178,4 +178,8 @@ public class GenericDao<T extends Identifiable> {
         }
     }
 
+    protected Optional<T> executeForSingle(String query, Connection connection, Object... params) throws DaoException {}
+
+    protected Optional<T> executeForSingle(String query, Object... params) throws DaoException {}
+
 }
