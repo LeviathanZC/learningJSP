@@ -1,7 +1,7 @@
 package by.zercomp.application.model.dao.builder.impl;
 
 import by.zercomp.application.model.dao.ColumnName;
-import by.zercomp.application.model.dao.builder.GeneralBuilder;
+import by.zercomp.application.model.dao.builder.CommonBuilder;
 import by.zercomp.application.model.entity.Role;
 import by.zercomp.application.model.entity.User;
 
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class UserBuilder implements GeneralBuilder<User> {
+public class UserBuilder implements CommonBuilder<User> {
     @Override
     public User build(ResultSet resultSet) throws SQLException {
         User user = new User();
