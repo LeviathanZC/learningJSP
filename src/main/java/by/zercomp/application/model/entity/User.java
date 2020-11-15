@@ -1,7 +1,6 @@
 package by.zercomp.application.model.entity;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class User extends Identifiable {
 
@@ -11,18 +10,16 @@ public class User extends Identifiable {
     private String firstName;
     private String lastName;
     private LocalDate birth;
-    private List<Order> orders;
 
     public User() {
     }
 
-    public User(String login, String email, String firstName, String lastName, LocalDate birth, List<Order> orders) {
+    public User(String login, String email, String firstName, String lastName, LocalDate birth) {
         this.login = login;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birth = birth;
-        this.orders = orders;
     }
 
     public Role getRole() {
@@ -71,14 +68,6 @@ public class User extends Identifiable {
 
     public void setBirth(LocalDate birth) {
         this.birth = birth;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 
     @Override
