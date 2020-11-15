@@ -89,13 +89,13 @@ public class GenericDao<T extends Identifiable> {
             ps = connection.prepareStatement(query);
             setParameters(ps, params);
             rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 T entity = builder.build(rs);
                 entites.add(entity);
             }
         } catch (SQLException throwables) {
             throw new DaoException("cannot get access to db : ", throwables);
-        } finally  {
+        } finally {
             try {
                 closeResource(rs);
             } finally {
@@ -105,7 +105,7 @@ public class GenericDao<T extends Identifiable> {
         return entites;
     }
 
-    protected List<T> executeQuery(String query, Object...params) throws DaoException {
+    protected List<T> executeQuery(String query, Object... params) throws DaoException {
         Connection connection = pool.getConnection();
         try {
             return executeQuery(query, connection, params);
@@ -138,7 +138,8 @@ public class GenericDao<T extends Identifiable> {
         return object;
     }
 
-    protected Optional<String> findString(String query, Connection connection, String columnName, Object... params) throws DaoException {
+    protected Optional<String> findString(String query, Connection connection, String columnName, Object... params)
+            throws DaoException {
         Optional<Object> foundString = findObject(query, connection, columnName, params);
         return foundString.map(String::valueOf);
     }
@@ -146,12 +147,20 @@ public class GenericDao<T extends Identifiable> {
     protected Optional<String> findString(String query, String columnName, Object... params) throws DaoException {
         Connection connection = pool.getConnection();
         try {
-            return findString(query,connection,columnName,params);
+            return findString(query, connection, columnName, params);
         } finally {
             pool.releaseConnection(connection);
         }
     }
 
-
+    protected boolean findBoolean(String query, String columnName, Object... params)
+            throws DaoException {
+        Connection connection = pool.getConnection();
+        try {
+            return Boolean.getBoolean(findObject(query, connection, columnName, params));
+        } finally {
+            pool.releaseConnection(connection);
+        }
+    }
 
 }
