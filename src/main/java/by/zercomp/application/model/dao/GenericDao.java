@@ -169,4 +169,13 @@ public class GenericDao<T extends Identifiable> {
         return foundLong.map(Long::parseLong(String::valueOf));
     }
 
+    protected Optional<Long> findLong(String query, String columnName, Object... params) throws DaoException {
+        Connection connection = pool.getConnection();
+        try {
+            return findLong(query, connection, columnName, params);
+        } finally {
+            pool.releaseConnection(connection);
+        }
+    }
+
 }
