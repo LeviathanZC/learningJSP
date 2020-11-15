@@ -6,5 +6,5 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface GeneralBuilder <T extends Identifiable> {
-    T build(ResultSet) throws SQLException;
+    T build(ResultSet resultSet) throws SQLException;
 }

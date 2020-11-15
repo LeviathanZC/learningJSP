@@ -2,7 +2,7 @@ package by.zercomp.application.model.dao;
 
 public class ColumnName {
     //Users
-    public static String ID = "id";
+    public static String USER_ID = "id";
     public static String LOGIN = "login";
     public static String EMAIL = "email";
     public static String PASSWORD = "pw_hash";
