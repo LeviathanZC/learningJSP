@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GenericDao<T extends Identifiable> {
     private static final Logger log = LogManager.getLogger(GenericDao.class);
@@ -111,6 +112,34 @@ public class GenericDao<T extends Identifiable> {
         } finally {
             pool.releaseConnection(connection);
         }
+    }
+
+    private Optional<Object> findObject(String query, Connection connection, String columnName, Object... params)
+            throws DaoException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Optional<Object> object = Optional.empty();
+        try {
+            ps = connection.prepareStatement(query);
+            setParameters(ps, params);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                object = Optional.of(rs.getObject(columnName));
+            }
+        } catch (SQLException throwables) {
+            throw new DaoException("cannot get access to db : ", throwables);
+        } finally {
+            try {
+                closeResource(rs);
+            } finally {
+                closeResource(ps);
+            }
+        }
+        return object;
+    }
+
+    private Optional<String> findString() throws DaoException {
+        return null;
     }
 
 }
