@@ -27,4 +27,7 @@ public interface ProductDao {
 
     List<Product> findInPriceRange(int minPrice, int maxPrice) throws DaoException;
 
+    void addProductQuantity(long id, int quantity) throws DaoException;
+
+    void subProductQuantity(long id, int quantity) throws DaoException;
 }
