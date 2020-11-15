@@ -1,12 +1,14 @@
 package by.zercomp.application.model.entity;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 public class Order extends Identifiable {
 
     private OrderStatus status;
     private Delivery delivery;
     private LocalDate date;
+    private Map<Product, Integer> orderList;
 
     public Order(OrderStatus status, Delivery delivery, LocalDate date) {
         this.status = status;
