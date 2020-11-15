@@ -89,8 +89,8 @@ public class GenericDao<T extends Identifiable> {
             setParameters(ps, params);
             rs = ps.executeQuery();
             while(rs.next()) {
-                /*T entity = someBuilder.build(rs);
-                entites.add(entity);*/
+                T entity = builder.build(rs);
+                entites.add(entity);
             }
         } catch (SQLException throwables) {
             throw new DaoException("cannot get access to db : ", throwables);
