@@ -7,10 +7,17 @@ import by.zercomp.application.model.entity.Product;
 import by.zercomp.application.model.exception.DaoException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductDao {
 
-    Product findById(long id) throws DaoException;
+    void addProduct(Product product) throws DaoException;
+
+    Product removeProduct(long id) throws DaoException;
+
+    void updateProduct(Product product) throws DaoException;
+
+    Optional<Product> findById(long id) throws DaoException;
 
     List<Product> findByCategory(Category category) throws DaoException;
 
