@@ -6,10 +6,8 @@ import by.zercomp.application.model.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GenericDao<T extends Identifiable> {
@@ -80,7 +78,27 @@ public class GenericDao<T extends Identifiable> {
     }
 
     protected List<T> executeQuery(String query, Connection connection, Object... params) throws DaoException {
-
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<T> entites = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(query);
+            setParameters(ps, params);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                /*T entity = someBuilder.build(rs);
+                entites.add(entity);*/
+            }
+        } catch (SQLException throwables) {
+            throw new DaoException("cannot get access to db : ", throwables);
+        } finally  {
+            try {
+                closeResource(rs);
+            } finally {
+                closeResource(ps);
+            }
+        }
+        return entites;
     }
 
     protected List<T> executeQuery(String query, Object...params) throws DaoException {
