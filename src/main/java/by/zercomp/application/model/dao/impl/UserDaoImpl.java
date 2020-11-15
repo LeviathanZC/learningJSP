@@ -10,6 +10,9 @@ import java.util.Optional;
 
 public class UserDaoImpl extends GenericDao<User> implements UserDao {
 
+    private static final String CREATE_USER = "INSERT INTO users" +
+            "(login, email, pw_hash, role_code, name, surname, birthDate) values (?, ?, ?, ?, ?, ?, ?)";
+
 
     public UserDaoImpl() {
         super(new UserBuilder());
@@ -17,7 +20,7 @@ public class UserDaoImpl extends GenericDao<User> implements UserDao {
 
     @Override
     public void create(User user, String pwHash) throws DaoException {
-
+        executeUpdate(CREATE_USER, user.getLogin(), user.getEmail(), pwHash, user.getRole().ordinal(), user.getFirstName(), user.getLastName(), user.getBirth());
     }
 
     @Override
