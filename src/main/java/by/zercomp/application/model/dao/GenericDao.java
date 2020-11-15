@@ -138,8 +138,10 @@ public class GenericDao<T extends Identifiable> {
         return object;
     }
 
-    private Optional<String> findString() throws DaoException {
-        return null;
+    private Optional<String> findString(String query, Connection connection, String columnName, Object... params) throws DaoException {
+        Optional<Object> foundString = findObject(query, connection, columnName, params);
+        return foundString.map(String::valueOf);
     }
+
 
 }
