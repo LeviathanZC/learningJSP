@@ -6,13 +6,11 @@ import java.util.Map;
 public class Order extends Identifiable {
 
     private OrderStatus status;
-    private Delivery delivery;
     private LocalDate date;
     private Map<Product, Integer> orderList;
 
-    public Order(OrderStatus status, Delivery delivery, LocalDate date) {
+    public Order(OrderStatus status, LocalDate date) {
         this.status = status;
-        this.delivery = delivery;
         this.date = date;
     }
 
@@ -24,13 +22,6 @@ public class Order extends Identifiable {
         this.status = status;
     }
 
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-    }
 
     public LocalDate getDate() {
         return date;
@@ -52,8 +43,7 @@ public class Order extends Identifiable {
 
         Order order = (Order) o;
 
-        if (getStatus() != order.getStatus()) return false;
-        if (getDelivery() != null ? !getDelivery().equals(order.getDelivery()) : order.getDelivery() != null)
+        if (getStatus() != order.getStatus())
             return false;
         return getDate() != null ? getDate().equals(order.getDate()) : order.getDate() == null;
     }
@@ -63,7 +53,6 @@ public class Order extends Identifiable {
         final int prime = 113;
         int result = super.hashCode();
         result = prime * result + (getStatus() != null ? getStatus().hashCode() : 0);
-        result = prime * result + (getDelivery() != null ? getDelivery().hashCode() : 0);
         result = prime * result + (getDate() != null ? getDate().hashCode() : 0);
         return result;
     }
@@ -72,7 +61,6 @@ public class Order extends Identifiable {
     public String toString() {
         final StringBuilder builder = new StringBuilder("Order{");
         builder.append("status=").append(status);
-        builder.append(", delivery=").append(delivery);
         builder.append(", date=").append(date);
         builder.append('}');
         return builder.toString();

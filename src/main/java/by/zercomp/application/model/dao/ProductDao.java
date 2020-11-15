@@ -2,7 +2,6 @@ package by.zercomp.application.model.dao;
 
 import by.zercomp.application.model.entity.Brand;
 import by.zercomp.application.model.entity.Category;
-import by.zercomp.application.model.entity.Model;
 import by.zercomp.application.model.entity.Product;
 import by.zercomp.application.model.exception.DaoException;
 

@@ -7,13 +7,13 @@ public class Product extends Identifiable {
     private long price;
     private Category category;
     private int quantity;
-    private Model model;
+    private String model;
     private Brand brand;
 
     public Product() {
     }
 
-    public Product(String name, String description, long price, Category category, int quantity, Model model, Brand brand) {
+    public Product(String name, String description, long price, Category category, int quantity, String model, Brand brand) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -63,11 +63,11 @@ public class Product extends Identifiable {
         this.quantity = quantity;
     }
 
-    public Model getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(Model model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
