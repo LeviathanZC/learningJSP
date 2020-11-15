@@ -6,6 +6,7 @@ import by.zercomp.application.model.exception.DaoException;
 import java.util.Optional;
 
 public interface UserDao {
+
     void create(User user, String pwHash) throws DaoException;
 
     Optional<User> findById(Long id) throws DaoException;

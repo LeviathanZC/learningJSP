@@ -5,6 +5,7 @@ import by.zercomp.application.model.entity.OrderStatus;
 import by.zercomp.application.model.entity.User;
 import by.zercomp.application.model.exception.DaoException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderDao {
@@ -15,5 +16,6 @@ public interface OrderDao {
 
     List<Order> findByUser(User user) throws DaoException;
 
+    List<Order> findInDateRange(LocalDate start, LocalDate end) throws DaoException;
 
 }
