@@ -2,7 +2,7 @@ package by.zercomp.application.model.dao.impl;
 
 import by.zercomp.application.model.dao.GenericDao;
 import by.zercomp.application.model.dao.UserDao;
-import by.zercomp.application.model.dao.builder.CommonBuilder;
+import by.zercomp.application.model.dao.builder.impl.UserBuilder;
 import by.zercomp.application.model.entity.User;
 import by.zercomp.application.model.exception.DaoException;
 
@@ -11,8 +11,8 @@ import java.util.Optional;
 public class UserDaoImpl extends GenericDao<User> implements UserDao {
 
 
-    protected UserDaoImpl(CommonBuilder<User> builder) {
-        super(builder);
+    public UserDaoImpl() {
+        super(new UserBuilder());
     }
 
     @Override
