@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 public class GenericDao<T extends Identifiable> {
     private static final Logger log = LogManager.getLogger(GenericDao.class);
@@ -78,5 +79,17 @@ public class GenericDao<T extends Identifiable> {
         }
     }
 
+    protected List<T> executeQuery(String query, Connection connection, Object... params) throws DaoException {
+
+    }
+
+    protected List<T> executeQuery(String query, Object...params) throws DaoException {
+        Connection connection = pool.getConnection();
+        try {
+            return executeQuery(query, connection, params);
+        } finally {
+            pool.releaseConnection(connection);
+        }
+    }
 
 }
