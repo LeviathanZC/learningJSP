@@ -138,12 +138,12 @@ public class GenericDao<T extends Identifiable> {
         return object;
     }
 
-    private Optional<String> findString(String query, Connection connection, String columnName, Object... params) throws DaoException {
+    protected Optional<String> findString(String query, Connection connection, String columnName, Object... params) throws DaoException {
         Optional<Object> foundString = findObject(query, connection, columnName, params);
         return foundString.map(String::valueOf);
     }
 
-    private Optional<String> findString(String query, String columnName, Object... params) throws DaoException {
+    protected Optional<String> findString(String query, String columnName, Object... params) throws DaoException {
         Connection connection = pool.getConnection();
         try {
             return findString(query,connection,columnName,params);
@@ -151,5 +151,7 @@ public class GenericDao<T extends Identifiable> {
             pool.releaseConnection(connection);
         }
     }
+
+
 
 }
