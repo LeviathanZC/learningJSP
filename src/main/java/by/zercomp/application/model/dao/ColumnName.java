@@ -26,7 +26,27 @@ public class ColumnName {
     public static String STATUS_CODE = "status_code";
     public static String STATUS_NAME = "status_name";
 
-    //Deliveries
-    public static String DELIVERY_ID = "id_delivery";
-    public static String STUB = "id_delivery";
+    //Products
+    public static String PRODUCT_ID = "product_id";
+    public static String PRODUCT_NAME = "name";
+    public static String PRODUCT_CATEGORY = "category_id";
+    public static String DESCRIPTION = "description";
+    public static String PRICE = "price";
+    public static String PRODUCT_BRAND = "brand_id";
+    public static String PRODUCT_MODEL = "model_id";
+    public static String QUANTITY = "quantity";
+
+    //Models
+    public static String MODEL_ID = "model_id";
+    public static String MODEL_NAME = "model_name";
+
+    //Brands
+    public static String BRAND_ID = "brand_id";
+    public static String BRAND_NAME = "brand_name";
+
+    //Categories
+    public static String CATEGORY_ID = "category_id";
+    public static String CATEGORY_NAME = "category_name";
+    public static String CATEGORY_DESCRIPTION = "description";
+
 }
