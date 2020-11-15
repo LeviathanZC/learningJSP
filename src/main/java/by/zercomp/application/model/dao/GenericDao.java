@@ -1,5 +1,6 @@
 package by.zercomp.application.model.dao;
 
+import by.zercomp.application.model.dao.builder.CommonBuilder;
 import by.zercomp.application.model.entity.Identifiable;
 import by.zercomp.application.model.exception.DaoException;
 import by.zercomp.application.model.pool.ConnectionPool;
@@ -13,8 +14,10 @@ import java.util.List;
 public class GenericDao<T extends Identifiable> {
     private static final Logger log = LogManager.getLogger(GenericDao.class);
     protected static final ConnectionPool pool = ConnectionPool.getInstance();
+    private final CommonBuilder<T> builder;
 
-    protected GenericDao() {
+    protected GenericDao(CommonBuilder<T> builder) {
+        this.builder = builder;
     }
 
     protected void startTransaction(Connection connection) throws SQLException {
