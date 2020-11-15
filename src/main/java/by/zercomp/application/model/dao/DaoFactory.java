@@ -12,6 +12,10 @@ public final class DaoFactory {
     public static DaoFactory getInstance() {
         return instance;
     }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
     /*
      public Dao get___Dao() {
         return ___Dao;
