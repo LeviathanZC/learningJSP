@@ -77,4 +77,6 @@ public class GenericDao<T extends Identifiable> {
             log.error("couldn't close resource : ", e);
         }
     }
+
+
 }
