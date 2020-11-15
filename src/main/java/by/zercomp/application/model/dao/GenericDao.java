@@ -157,7 +157,7 @@ public class GenericDao<T extends Identifiable> {
             throws DaoException {
         Connection connection = pool.getConnection();
         try {
-            return Boolean.getBoolean(findObject(query, connection, columnName, params));
+            return (boolean)findObject(query, connection, columnName, params).orElseThrow(DaoException::new);
         } finally {
             pool.releaseConnection(connection);
         }
