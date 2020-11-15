@@ -178,8 +178,22 @@ public class GenericDao<T extends Identifiable> {
         }
     }
 
-    protected Optional<T> executeForSingle(String query, Connection connection, Object... params) throws DaoException {}
+    protected Optional<T> executeForSingle(String query, Connection connection, Object... params) throws DaoException {
+        List<T> entities = executeQuery(query, connection, params);
+        if (entities.size() == 1) {
+            return Optional.of(entities.get(0));
+        } else {
+            return Optional.empty();
+        }
+    }
 
-    protected Optional<T> executeForSingle(String query, Object... params) throws DaoException {}
+    protected Optional<T> executeForSingle(String query, Object... params) throws DaoException {
+        Connection connection = pool.getConnection();
+        try {
+            executeForSingle(query, connection, params);
+        } finally {
+            pool.releaseConnection(connection);
+        }
+    }
 
 }
