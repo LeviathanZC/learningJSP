@@ -163,4 +163,10 @@ public class GenericDao<T extends Identifiable> {
         }
     }
 
+    protected Optional<Long> findLong(String query, Connection connection, String columnName, Object... params)
+            throws DaoException {
+        Optional<Object> foundLong = findObject(query, connection, columnName, params);
+        return foundLong.map(Long::parseLong(String::valueOf));
+    }
+
 }
