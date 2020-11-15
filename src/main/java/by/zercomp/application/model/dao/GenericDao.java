@@ -143,5 +143,13 @@ public class GenericDao<T extends Identifiable> {
         return foundString.map(String::valueOf);
     }
 
+    private Optional<String> findString(String query, String columnName, Object... params) throws DaoException {
+        Connection connection = pool.getConnection();
+        try {
+            return findString(query,connection,columnName,params);
+        } finally {
+            pool.releaseConnection(connection);
+        }
+    }
 
 }
