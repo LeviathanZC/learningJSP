@@ -33,12 +33,7 @@ public class ColumnName {
     public static String DESCRIPTION = "description";
     public static String PRICE = "price";
     public static String PRODUCT_BRAND = "brand_id";
-    public static String PRODUCT_MODEL = "model_id";
     public static String QUANTITY = "quantity";
-
-    //Models
-    public static String MODEL_ID = "model_id";
-    public static String MODEL_NAME = "model_name";
 
     //Brands
     public static String BRAND_ID = "brand_id";
