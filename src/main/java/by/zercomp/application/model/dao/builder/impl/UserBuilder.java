@@ -14,7 +14,7 @@ public class UserBuilder implements CommonBuilder<User> {
     public User build(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getLong(ColumnName.USER_ID));
-        user.setRole(Role.valueOf(resultSet.getString(ColumnName.ROLE_NAME).toUpperCase()));
+        user.setRole(Role.values()[resultSet.getInt(ColumnName.ROLE)]);
         user.setLogin(resultSet.getString(ColumnName.LOGIN));
         user.setEmail(resultSet.getString(ColumnName.EMAIL));
         user.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));

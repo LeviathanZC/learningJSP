@@ -2,18 +2,18 @@ package by.zercomp.application.model.dao;
 
 public class ColumnName {
     //Users
-    public static String USER_ID = "id";
+    public static String USER_ID = "users.id";
     public static String LOGIN = "login";
     public static String EMAIL = "email";
     public static String PASSWORD = "pw_hash";
-    public static String ROLE = "role_code";
-    public static String FIRST_NAME = "name";
-    public static String LAST_NAME = "surname";
+    public static String ROLE = "role";
+    public static String FIRST_NAME = "firstName";
+    public static String LAST_NAME = "lastName";
     public static String BIRTH_DATE = "birthDate";
 
     //User roles
-    public static String ROLE_ID = "group_id";
-    public static String ROLE_NAME = "name";
+    public static String ROLE_ID = "user_role.role_id";
+    public static String ROLE_NAME = "role_name";
 
     //Orders
     public static String ORDER_ID = "order_id";
