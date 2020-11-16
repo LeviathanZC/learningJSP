@@ -2,6 +2,7 @@ package by.zercomp.application;
 
 import by.zercomp.application.model.dao.DaoFactory;
 import by.zercomp.application.model.dao.UserDao;
+import by.zercomp.application.model.dao.impl.ProductDaoImpl;
 import by.zercomp.application.model.entity.Role;
 import by.zercomp.application.model.entity.User;
 import by.zercomp.application.model.exception.DaoException;
@@ -20,5 +21,6 @@ public class MainController {
         user.setLastName("S_GORY");
         user.setBirth(LocalDate.now());
         dao.updatePassword("varapay@gmail.com", "IvanVorobey");
+        System.out.println(new ProductDaoImpl().findById(1l));
     }
 }

@@ -42,6 +42,6 @@ public class ColumnName {
     //Categories
     public static String CATEGORY_ID = "category_id";
     public static String CATEGORY_NAME = "category_name";
-    public static String CATEGORY_DESCRIPTION = "description";
+    public static String CATEGORY_DESCRIPTION = "category_desc";
 
 }

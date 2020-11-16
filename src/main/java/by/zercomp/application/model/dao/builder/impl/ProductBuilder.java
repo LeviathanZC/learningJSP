@@ -13,7 +13,7 @@ public class ProductBuilder implements CommonBuilder<Product> {
         Product product = new Product();
         product.setId(resultSet.getLong(ColumnName.PRODUCT_ID));
         product.setName(resultSet.getString(ColumnName.PRODUCT_NAME));
-        product.setDescription(resultSet.getString(ColumnName.CATEGORY_DESCRIPTION));
+        product.setDescription(resultSet.getString(ColumnName.DESCRIPTION));
         product.setPrice(resultSet.getLong(ColumnName.PRICE));
         product.setCategory(new CategoryBuilder().build(resultSet));
         product.setQuantity(resultSet.getInt(ColumnName.QUANTITY));

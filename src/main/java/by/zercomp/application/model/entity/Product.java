@@ -111,11 +111,11 @@ public class Product extends Identifiable {
     public String toString() {
         final StringBuilder builder = new StringBuilder("Product{");
         builder.append("name='").append(this.name).append('\'');
-        builder.append(", description='").append(description).append('\'');
-        builder.append(", price=").append(price).append('\'');
-        builder.append(", category=").append(category).append('\'');
-        builder.append(", quantity=").append(quantity).append('\'');
-        builder.append(", brand=").append(brand).append('\'');
+        builder.append(", description=''").append(description).append('\'');
+        builder.append(", price='").append(price).append('\'');
+        builder.append(", category='").append(category).append('\'');
+        builder.append(", quantity='").append(quantity).append('\'');
+        builder.append(", brand='").append(brand).append('\'');
         builder.append('}');
         return builder.toString();
     }

@@ -1,5 +1,6 @@
 package by.zercomp.application.model.dao;
 
+import by.zercomp.application.model.dao.impl.ProductDaoImpl;
 import by.zercomp.application.model.dao.impl.UserDaoImpl;
 
 public final class DaoFactory {
@@ -7,6 +8,7 @@ public final class DaoFactory {
     private static final DaoFactory instance = new DaoFactory();
 
     private final UserDao userDao = new UserDaoImpl();
+    private final ProductDao productDao = new ProductDaoImpl();
 
     private DaoFactory() {
     }

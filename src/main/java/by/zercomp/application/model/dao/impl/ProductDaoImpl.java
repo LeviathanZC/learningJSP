@@ -13,7 +13,13 @@ import java.util.Optional;
 
 public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
 
-    private ProductDaoImpl() {
+    private static final String FIND_BY_ID = "SELECT product_id, products.name, products.category_id, " +
+            "products.description, price, products.brand_id, quantity, " +
+            "brands.brand_name, category_name, category_desc FROM products " +
+            "JOIN brands ON products.brand_id = brands.brand_id " +
+            "JOIN categories ON products.category_id = categories.category_id WHERE product_id = ?";
+
+    public ProductDaoImpl() {
         super(new ProductBuilder());
     }
 
@@ -34,7 +40,7 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
 
     @Override
     public Optional<Product> findById(long id) throws DaoException {
-        return Optional.empty();
+        return executeForSingle(FIND_BY_ID, id);
     }
 
     @Override
