@@ -6,6 +6,7 @@ import by.zercomp.application.model.entity.User;
 import by.zercomp.application.model.exception.DaoException;
 import by.zercomp.application.model.exception.ServiceException;
 import by.zercomp.application.model.service.UserService;
+import by.zercomp.application.util.ProjectSecurity;
 
 import java.util.Map;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> signIn(String login, String password) throws ServiceException {
         try {
             Optional<String> hashedPw = userDao.findPasswordByLogin(login);
-            if (hashedPw.equals(password)) {
+            if (hashedPw.isPresent() && hashedPw.get().equals(ProjectSecurity.generateHash(password))) {
                 return userDao.findByLogin(login);
             }
             return Optional.empty();
