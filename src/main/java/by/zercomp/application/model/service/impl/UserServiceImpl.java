@@ -7,6 +7,7 @@ import by.zercomp.application.model.exception.DaoException;
 import by.zercomp.application.model.exception.ServiceException;
 import by.zercomp.application.model.service.DTMapKey;
 import by.zercomp.application.model.service.UserService;
+import by.zercomp.application.model.validator.UserValidator;
 import by.zercomp.application.util.ProjectSecurity;
 
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private static UserDao userDao = DaoFactory.getInstance().getUserDao();
+    private static UserValidator validator = UserValidator.getInstance();
 
     @Override
     public Optional<String> signUp(User user, String password) throws ServiceException {
@@ -66,7 +68,22 @@ public class UserServiceImpl implements UserService {
         String login = changeData.get(DTMapKey.LOGIN);
         String oldPw = changeData.get(DTMapKey.OLD_PW);
         Optional<User> user = signIn(login, oldPw);
-
+        if (user.isPresent() && validator.checkPasswords(changeData)) {
+            updatePassword(user.get().getEmail(), changeData.get(DTMapKey.PASSWORD));
+            return true;
+        }
+        if (!user.isPresent()) {
+            //TODO
+        }
         return false;
+    }
+
+    private void updatePassword(String email, String newPassword) throws ServiceException {
+        try {
+            String hashedPw = ProjectSecurity.generateHash(newPassword);
+            userDao.updatePassword(email, hashedPw);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 }

@@ -25,11 +25,11 @@ public class UserValidator {
         isValid &= checkEmail(signUpData);
         isValid &= checkName(signUpData.get(DTMapKey.FIRST_NAME), signUpData, DTMapKey.FIRST_NAME);
         isValid &= checkName(signUpData.get(DTMapKey.LAST_NAME), signUpData, DTMapKey.LAST_NAME);
-        isValid &= checkPassword(signUpData);
+        isValid &= checkPasswords(signUpData);
         return isValid;
     }
 
-    public boolean checkPassword(Map<String, String> signUpData) {
+    public boolean checkPasswords(Map<String, String> signUpData) {
         String password = signUpData.get(DTMapKey.PASSWORD);
         String repeatPw = signUpData.get(DTMapKey.REPEAT_PW);
         if (password == null || !PASSWORD_PATTERN.matcher(password).matches()) {
