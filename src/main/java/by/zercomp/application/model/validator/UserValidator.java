@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 
 public class UserValidator {
     private static final UserValidator instance = new UserValidator();
-    private static final int MIN_PASSWORD_LENGTH = 8;
-    private static final int MAX_PASSWORD_LENGTH = 20;
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
     private static final Pattern LOGIN_PATTERN = Pattern.compile("\\w{3,20}");
     private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Za-zА-Яа-яёЁ]{3,20}$");
@@ -22,9 +20,24 @@ public class UserValidator {
         return instance;
     }
 
-    public boolean checkName(String potential, Map<String, String> signupData, String error) {
+
+
+    public boolean checkPassword(Map<String, String> signUpData) {
+        String password = signUpData.get(DTMapKey.PASSWORD);
+        String repeatPw = signUpData.get(DTMapKey.REPEAT_PW);
+        if (password == null || !PASSWORD_PATTERN.matcher(password).matches()) {
+            signUpData.put(DTMapKey.PASSWORD, ErrorMsg.HARD_PASSWORD.toString());
+            return false;
+        } else if (!password.equals(repeatPw)) {
+            signUpData.put(DTMapKey.REPEAT_PW, ErrorMsg.DIFFERENT_PASSWORDS.toString());
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkName(String potential, Map<String, String> signUpData, String error) {
         if (potential == null || !NAME_PATTERN.matcher(potential).matches()) {
-            signupData.put(error, ErrorMsg.NAME.toString());
+            signUpData.put(error, ErrorMsg.NAME.toString());
             return false;
         }
         return true;
