@@ -5,6 +5,7 @@ import by.zercomp.application.model.dao.UserDao;
 import by.zercomp.application.model.entity.User;
 import by.zercomp.application.model.exception.DaoException;
 import by.zercomp.application.model.exception.ServiceException;
+import by.zercomp.application.model.service.DTMapKey;
 import by.zercomp.application.model.service.UserService;
 import by.zercomp.application.util.ProjectSecurity;
 
@@ -35,21 +36,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findById(long id) throws ServiceException {
-        return Optional.empty();
+        try {
+            return userDao.findById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
     public Optional<User> findByLogin(String login) throws ServiceException {
-        return Optional.empty();
+        try {
+            return userDao.findByLogin(login);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
     public Optional<User> findByEmail(String email) throws ServiceException {
-        return Optional.empty();
+        try {
+            return userDao.findByEmail(email);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
     public boolean updatePassword(Map<String, String> changeData) throws ServiceException {
+        String login = changeData.get(DTMapKey.LOGIN);
+        String oldPw = changeData.get(DTMapKey.OLD_PW);
+        Optional<User> user = signIn(login, oldPw);
         return false;
     }
 }
