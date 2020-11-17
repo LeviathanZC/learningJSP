@@ -20,7 +20,14 @@ public class UserValidator {
         return instance;
     }
 
-
+    public boolean checkSignUpData(Map<String, String> signUpData) {
+        boolean isValid = checkLogin(signUpData);
+        isValid &= checkEmail(signUpData);
+        isValid &= checkName(signUpData.get(DTMapKey.FIRST_NAME), signUpData, DTMapKey.FIRST_NAME);
+        isValid &= checkName(signUpData.get(DTMapKey.LAST_NAME), signUpData, DTMapKey.LAST_NAME);
+        isValid &= checkPassword(signUpData);
+        return isValid;
+    }
 
     public boolean checkPassword(Map<String, String> signUpData) {
         String password = signUpData.get(DTMapKey.PASSWORD);
