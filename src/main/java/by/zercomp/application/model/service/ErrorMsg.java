@@ -2,7 +2,8 @@ package by.zercomp.application.model.service;
 
 public enum  ErrorMsg {
     EMAIL,
-    LOGIN;
+    LOGIN,
+    NAME;
 
 
     @Override

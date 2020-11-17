@@ -11,7 +11,8 @@ public class UserValidator {
     private static final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_PASSWORD_LENGTH = 20;
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
-    private static final Pattern LOGIN_PATTERN = Pattern.compile("^[A-Za-zА-Яа-яёЁ]{3,20}$");
+    private static final Pattern LOGIN_PATTERN = Pattern.compile("\\w{3,20}");
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Za-zА-Яа-яёЁ]{3,20}$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
             "(?=.*[@#$%^&-+=()])(?=\\\\S+$).{8,20}$");
 
@@ -19,6 +20,14 @@ public class UserValidator {
 
     public static UserValidator getInstance() {
         return instance;
+    }
+
+    public boolean checkName(String potential, Map<String, String> signupData, String error) {
+        if (potential == null || !NAME_PATTERN.matcher(potential).matches()) {
+            signupData.put(error, ErrorMsg.NAME.toString());
+            return false;
+        }
+        return true;
     }
 
     private boolean checkEmail(Map<String, String> signUpData) {
