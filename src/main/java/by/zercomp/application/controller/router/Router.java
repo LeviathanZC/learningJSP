@@ -15,6 +15,18 @@ public class Router {
         this.type = type;
     }
 
+    public void setRedirect(String page) {
+        this.type = RouterType.REDIRECT;
+        this.page = page;
+    }
+
+    public void setForward(String page) {
+        this.type = RouterType.FORWARD;
+        this.page = page;
+    }
+
+
+
     public String getPage() {
         return page;
     }
