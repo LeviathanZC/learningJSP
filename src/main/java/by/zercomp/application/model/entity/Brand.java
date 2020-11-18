@@ -45,7 +45,7 @@ public class Brand extends Identifiable {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder("Brand{");
-        builder.append("name='").append(this.name).append("'\n}");
+        builder.append("name='").append(this.name).append("'}");
         return builder.toString();
     }
 }

@@ -1,8 +1,10 @@
 package by.zercomp.application;
 
+import by.zercomp.application.model.dao.impl.ProductDaoImpl;
+import by.zercomp.application.model.entity.Brand;
+import by.zercomp.application.model.entity.Category;
+import by.zercomp.application.model.entity.Product;
 import by.zercomp.application.model.exception.DaoException;
-import by.zercomp.application.model.service.UserService;
-import by.zercomp.application.model.service.impl.UserServiceImpl;
 
 public class MainController {
     public static void main(String[] args) throws DaoException {
@@ -17,7 +19,20 @@ public class MainController {
         user.setBirth(LocalDate.now());
         dao.updatePassword("varapay@gmail.com", "IvanVorobey");
         System.out.println(new ProductDaoImpl().findById(1l));*/
-        UserService service = new UserServiceImpl();
-        System.out.println(service.signIn("varapay", "IvanVorobey"));
+        /*UserService service = new UserServiceImpl();
+        System.out.println(service.signIn("varapay", "IvanVorobey"));*/
+        Brand brand = new Brand();
+        brand.setId(1l);
+        Category category = new Category();
+        category.setId(1l);
+        Product product = new Product();
+        product.setId(3l);
+        product.setName("test");
+        product.setQuantity(1);
+        product.setPrice(1);
+        product.setDescription("testDescription");
+        product.setBrand(brand);
+        product.setCategory(category);
+        new ProductDaoImpl().addProduct(product);
     }
 }

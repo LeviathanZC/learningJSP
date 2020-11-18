@@ -13,11 +13,24 @@ import java.util.Optional;
 
 public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
 
+    private static final String ADD_PRODUCT = "INSERT INTO products(product_id, name, category_id, " +
+            "description, price, brand_id, quantity) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
     private static final String FIND_BY_ID = "SELECT product_id, products.name, products.category_id, " +
             "products.description, price, products.brand_id, quantity, " +
             "brands.brand_name, category_name, category_desc FROM products " +
             "JOIN brands ON products.brand_id = brands.brand_id " +
             "JOIN categories ON products.category_id = categories.category_id WHERE product_id = ?";
+    private static final String FIND_BY_CATEGORY = "SELECT product_id, products.name, products.category_id, " +
+            "products.description, price, products.brand_id, quantity, " +
+            "brands.brand_name, category_name, category_desc FROM products " +
+            "JOIN brands ON products.brand_id = brands.brand_id " +
+            "JOIN categories ON products.category_id = categories.category_id WHERE products.category_id = ?";
+    private static final String FIND_BY_BRAND = "SELECT product_id, products.name, products.category_id, " +
+            "products.description, price, products.brand_id, quantity, " +
+            "brands.brand_name, category_name, category_desc FROM products " +
+            "JOIN brands ON products.brand_id = brands.brand_id " +
+            "JOIN categories ON products.category_id = categories.category_id WHERE products.brand_id = ?";
 
     public ProductDaoImpl() {
         super(new ProductBuilder());
@@ -25,7 +38,8 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
 
     @Override
     public void addProduct(Product product) throws DaoException {
-
+        executeUpdate(ADD_PRODUCT, product.getId(), product.getName(), product.getCategory().getId(),
+                product.getDescription(), product.getPrice(), product.getBrand().getId(), product.getQuantity());
     }
 
     @Override
@@ -45,12 +59,12 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
 
     @Override
     public List<Product> findByCategory(Category category) throws DaoException {
-        return null;
+        return executeQuery(FIND_BY_CATEGORY, category.getId());
     }
 
     @Override
     public List<Product> findByBrand(Brand brand) throws DaoException {
-        return null;
+        return executeQuery(FIND_BY_BRAND, brand.getId());
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.Optional;
 public class UserDaoImpl extends GenericDao<User> implements UserDao {
 
     private static final String CREATE_USER = "INSERT INTO users" +
-            "(login, email, pw_hash, role_id, name, surname, birthDate) values (?, ?, ?, ?, ?, ?, ?)";
+            "(login, email, pw_hash, role_id, name, surname, birthDate) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT users.id, login, email, pw_hash, role, firstName, lastName, " +
             "birthDate FROM users JOIN user_roles ON users.role = user_roles.role_id AND users.id = ?";
     private static final String FIND_BY_LOGIN = "SELECT users.id, login, email, pw_hash, role, firstName, lastName, " +
