@@ -18,7 +18,8 @@ public class RequestController extends HttpServlet {
         processing(httpServletRequest, httpServletResponse);
     }
 
-    private void processing(HttpServletRequest request, HttpServletResponse response) {
-
+    private void processing(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("Hello", new Integer(10));
+        request.getRequestDispatcher("/WEB-INF/pages/welcomePage.jsp").forward(request, response);
     }
 }
