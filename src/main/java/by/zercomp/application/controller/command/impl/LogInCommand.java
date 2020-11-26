@@ -12,6 +12,6 @@ public class LogInCommand implements ActionCommand {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("Hello", new Integer(10));
-        request.getRequestDispatcher("/WEB-INF/pages/welcomePage.jsp");
+        request.getRequestDispatcher("/WEB-INF/pages/signIn.jsp");
     }
 }

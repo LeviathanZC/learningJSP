@@ -13,4 +13,20 @@
     <servlet-name>ReqServlet</servlet-name>
     <url-pattern>/servlet</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>signIn.jsp</servlet-name>
+    <jsp-file>/WEB-INF/pages/auth/signIn.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>signIn.jsp</servlet-name>
+    <url-pattern>/signIn</url-pattern>
+  </servlet-mapping>
+
+  <!--<jsp-property-group>
+    <url-pattern>*.jsp</url-pattern>
+    <el-ignored>true</el-ignored>
+    <scripting-invalid>true</scripting-invalid>
+  </jsp-property-group>-->
 </web-app>
+
