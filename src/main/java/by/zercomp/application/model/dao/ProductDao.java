@@ -12,7 +12,7 @@ public interface ProductDao {
 
     void addProduct(Product product) throws DaoException;
 
-    Product removeProduct(long id) throws DaoException;
+    void removeProduct(long id) throws DaoException;
 
     void updateProduct(Product product) throws DaoException;
 

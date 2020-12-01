@@ -31,6 +31,8 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
             "brands.brand_name, category_name, category_desc FROM products " +
             "JOIN brands ON products.brand_id = brands.brand_id " +
             "JOIN categories ON products.category_id = categories.category_id WHERE products.brand_id = ?";
+    private static final String REMOVE_PRODUCT = "DELETE FROM products WHERE product_id = ?";
+    private static final String UPDATE_INFO = "";
 
     public ProductDaoImpl() {
         super(new ProductBuilder());
@@ -43,13 +45,13 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
     }
 
     @Override
-    public Product removeProduct(long id) throws DaoException {
-        return null;
+    public void removeProduct(long id) throws DaoException {
+        executeUpdate(REMOVE_PRODUCT, id);
     }
 
     @Override
     public void updateProduct(Product product) throws DaoException {
-
+        executeUpdate();
     }
 
     @Override
