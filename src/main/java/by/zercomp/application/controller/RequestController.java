@@ -1,15 +1,14 @@
 package by.zercomp.application.controller;
 
-import by.zercomp.application.model.entity.User;
-import by.zercomp.application.model.service.ServiceFactory;
+import by.zercomp.application.controller.command.ActionCommand;
+import by.zercomp.application.controller.command.ActionProvider;
+import by.zercomp.application.controller.router.Router;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
 
 public class RequestController extends HttpServlet {
 
@@ -24,14 +23,15 @@ public class RequestController extends HttpServlet {
     }
 
     private void processing(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        ActionCommand command = ActionProvider.defineAction(request.getParameter(RequestParam.COMMAND));
+        Router router = command.execute(request, response);
+        switch (router.getType()) {
+            case FORWARD: {
+                request.getRequestDispatcher(router.getPage()).forward(request, response);
+            }
+            case REDIRECT: {
+                response.sendRedirect(router.getPage());
+            }
+        }
     }
-
-    /*
-    TODO
-     Команды
-     Реализации
-     JspPath
-
-     */
 }
