@@ -27,6 +27,7 @@ public class LogInCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //TODO router page string
         Router router = new Router("", RouterType.REDIRECT);
         String login = request.getParameter(RequestParam.LOGIN);
         String password = request.getParameter(RequestParam.PASSWORD);
