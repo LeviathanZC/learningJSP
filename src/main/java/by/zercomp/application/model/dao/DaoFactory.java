@@ -20,6 +20,10 @@ public final class DaoFactory {
     public UserDao getUserDao() {
         return userDao;
     }
+
+    public ProductDao getProductDao() {
+        return productDao;
+    }
     /*
      public Dao get___Dao() {
         return ___Dao;

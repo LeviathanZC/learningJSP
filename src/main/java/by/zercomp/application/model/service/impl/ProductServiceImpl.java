@@ -13,8 +13,7 @@ import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
 
-    private ProductDao productDao = DaoFactory.getInstance().getUserDao();
-    private ProductValidator
+    private ProductDao productDao = DaoFactory.getInstance().ge();
 
     @Override
     public Optional<Product> findById(long id) throws ServiceException {
