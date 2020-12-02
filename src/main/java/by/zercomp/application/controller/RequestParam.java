@@ -22,6 +22,7 @@ public class RequestParam {
     public static final String PRICE_TO = "price_to";
     public static final String PRODUCT_BRAND = "product_brand";
     public static final String PRODUCT_CATEGORY = "product_category";
+    public static final String PRODUCT_DESCR = "product_description";
 
 
 }

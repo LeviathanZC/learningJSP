@@ -1,5 +1,6 @@
 package by.zercomp.application.model.service.impl;
 
+import by.zercomp.application.controller.RequestParam;
 import by.zercomp.application.model.dao.DaoFactory;
 import by.zercomp.application.model.dao.ProductDao;
 import by.zercomp.application.model.entity.Brand;
@@ -10,6 +11,7 @@ import by.zercomp.application.model.exception.ServiceException;
 import by.zercomp.application.model.service.ProductService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
@@ -44,18 +46,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void add(Map<String, String> productParams) throws ServiceException {
+    public void add(Map<String, Object> productParams) throws ServiceException {
         try {
-            productDao.addProduct();
+            productDao.addProduct(productParams);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public void update(Product product, int id) throws ServiceException {
+    public void update(Map<String, Object> productParams, int id) throws ServiceException {
         try {
-            productDao.updateProduct(product);
+            productParams.put(RequestParam.PRODUCT_ID, id);
+            productDao.updateProduct(productParams);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

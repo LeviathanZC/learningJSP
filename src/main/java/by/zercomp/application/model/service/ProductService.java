@@ -17,9 +17,9 @@ public interface ProductService {
 
     List<Product> findByCategory(Category category) throws ServiceException;
 
-    void add(Map<String, String> productParams) throws ServiceException;
+    void add(Map<String, Object> productParams) throws ServiceException;
 
-    void update(Product product, int id) throws ServiceException;
+    void update(Map<String, Object> productParams, int id) throws ServiceException;
 
     List<Product> findProductInRangeOfPrice(int min, int max) throws ServiceException;
 

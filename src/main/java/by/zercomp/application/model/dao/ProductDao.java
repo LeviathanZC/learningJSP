@@ -11,11 +11,11 @@ import java.util.Optional;
 
 public interface ProductDao {
 
-    void addProduct(Product product) throws DaoException;
+    void addProduct(Map<String, Object> productParams) throws DaoException;
 
     void removeProduct(long id) throws DaoException;
 
-    void updateProduct(Map<String, String> productParams) throws DaoException;
+    void updateProduct(Map<String, Object> productParams) throws DaoException;
 
     Optional<Product> findById(long id) throws DaoException;
 

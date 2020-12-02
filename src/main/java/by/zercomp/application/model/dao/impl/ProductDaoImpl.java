@@ -12,10 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static by.zercomp.application.controller.RequestParam.*;
+
 public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
 
-    private static final String ADD_PRODUCT = "INSERT INTO products(product_id, name, category_id, " +
-            "description, price, brand_id, quantity) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String ADD_PRODUCT = "INSERT INTO products(name, category_id, " +
+            "description, price, brand_id, quantity) VALUES (?, ?, ?, ?, ?, ?)";
 
     private static final String FIND_BY_ID = "SELECT product_id, products.name, products.category_id, " +
             "products.description, price, products.brand_id, quantity, " +
@@ -48,9 +50,13 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
     }
 
     @Override
-    public void addProduct(Product product) throws DaoException {
-        executeUpdate(ADD_PRODUCT, (int)productParams.getId(), product.getName(), product.getCategory().getId(),
-                product.getDescription(), product.getPrice(), product.getBrand().getId(), product.getQuantity());
+    public void addProduct(Map<String, Object> productParams) throws DaoException {
+        executeUpdate(ADD_PRODUCT, (int) productParams.get(PRODUCT_ID),
+                (int) productParams.get(PRODUCT_CATEGORY),
+                (String) productParams.get(PRODUCT_DESCR),
+                (int) productParams.get(PRICE),
+                (int) productParams.get(PRODUCT_BRAND),
+                (int) productParams.get(QUANTITY));
     }
 
     @Override
@@ -59,9 +65,13 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
     }
 
     @Override
-    public void updateProduct(Map<String, String> productParams) throws DaoException {
-        executeUpdate(UPDATE_INFO, productParams.getName(), productParams.getCategory().getId(), productParams.getDescription(),
-                                    productParams.getPrice(), productParams.getBrand().getId(), productParams.getQuantity(), productParams.getId());
+    public void updateProduct(Map<String, Object> productParams) throws DaoException {
+        executeUpdate(UPDATE_INFO, (int) productParams.get(PRODUCT_ID),
+                (int) productParams.get(PRODUCT_CATEGORY),
+                (String) productParams.get(PRODUCT_DESCR),
+                (int) productParams.get(PRICE),
+                (int) productParams.get(PRODUCT_BRAND),
+                (int) productParams.get(QUANTITY));
     }
 
     @Override
