@@ -2,7 +2,7 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>ReqServlet</servlet-name>
@@ -23,10 +23,13 @@
     <url-pattern>/signIn</url-pattern>
   </servlet-mapping>
 
-  <!--<jsp-property-group>
-    <url-pattern>*.jsp</url-pattern>
-    <el-ignored>true</el-ignored>
-    <scripting-invalid>true</scripting-invalid>
-  </jsp-property-group>-->
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <el-enabled>true</el-enabled>
+      <scripting-enabled>true</scripting-enabled>
+    </jsp-property-group>
+  </jsp-config>
+
 </web-app>
 

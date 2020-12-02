@@ -1,5 +1,7 @@
 package by.zercomp.application.model.service.impl;
 
+import by.zercomp.application.model.dao.DaoFactory;
+import by.zercomp.application.model.dao.ProductDao;
 import by.zercomp.application.model.entity.Brand;
 import by.zercomp.application.model.entity.Category;
 import by.zercomp.application.model.entity.Product;
@@ -10,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
+
+    private ProductDao productDao = DaoFactory.getInstance().getUserDao();
+    private ProductValidator
 
     @Override
     public Optional<Product> findById(long id) throws ServiceException {
