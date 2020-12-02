@@ -5,6 +5,7 @@ public enum  ErrorMsg {
     LOGIN,
     NAME,
     HARD_PASSWORD,
+    LOGIN_OCCUPIED,
     DIFFERENT_PASSWORDS;
 
 

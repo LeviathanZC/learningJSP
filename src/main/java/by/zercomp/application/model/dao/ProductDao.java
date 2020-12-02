@@ -6,6 +6,7 @@ import by.zercomp.application.model.entity.Product;
 import by.zercomp.application.model.exception.DaoException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ProductDao {
@@ -14,7 +15,7 @@ public interface ProductDao {
 
     void removeProduct(long id) throws DaoException;
 
-    void updateProduct(Product product) throws DaoException;
+    void updateProduct(Map<String, String> productParams) throws DaoException;
 
     Optional<Product> findById(long id) throws DaoException;
 

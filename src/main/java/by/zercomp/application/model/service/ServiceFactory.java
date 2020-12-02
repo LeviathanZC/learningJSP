@@ -1,11 +1,12 @@
 package by.zercomp.application.model.service;
 
+import by.zercomp.application.model.service.impl.ProductServiceImpl;
 import by.zercomp.application.model.service.impl.UserServiceImpl;
 
 public class ServiceFactory {
     private static final ServiceFactory instance = new ServiceFactory();
     private final UserService userService = new UserServiceImpl();
-    private ProductService productService;
+    private ProductService productService = new ProductServiceImpl();
     private OrderService orderService;
 
     private ServiceFactory() {}
@@ -16,5 +17,9 @@ public class ServiceFactory {
 
     public UserService getUserService() {
         return userService;
+    }
+
+    public ProductService getProductService() {
+        return productService;
     }
 }

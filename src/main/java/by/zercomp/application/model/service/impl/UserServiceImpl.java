@@ -6,6 +6,7 @@ import by.zercomp.application.model.entity.User;
 import by.zercomp.application.model.exception.DaoException;
 import by.zercomp.application.model.exception.ServiceException;
 import by.zercomp.application.model.service.DTMapKey;
+import by.zercomp.application.model.service.ErrorMsg;
 import by.zercomp.application.model.service.UserService;
 import by.zercomp.application.model.validator.UserValidator;
 import by.zercomp.application.util.ProjectSecurity;
@@ -20,6 +21,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<String> signUp(User user, String password) throws ServiceException {
+        Optional<String> error = Optional.empty();
+        try {
+            if (userDao.findByLogin(user.getLogin()).isPresent()) {
+                error = Optional.of(ErrorMsg.LOGIN_OCCUPIED.toString());
+            } else {
+                password = ProjectSecurity.generateHash(password);
+                userDao.create(user, password);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
         return Optional.empty();
     }
 

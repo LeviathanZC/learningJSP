@@ -1,6 +1,6 @@
 package by.zercomp.application.controller;
 
-public class AttributeName {
+public class AttributeKey {
 
     public static final String ROLE_NAME = "roleName";
     public static final String LOGIN = "login";

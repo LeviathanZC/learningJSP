@@ -44,9 +44,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void add(Product product) throws ServiceException {
+    public void add(Map<String, String> productParams) throws ServiceException {
         try {
-            productDao.addProduct(product);
+            productDao.addProduct();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -1,6 +1,6 @@
 package by.zercomp.application.controller.command.impl;
 
-import by.zercomp.application.controller.AttributeName;
+import by.zercomp.application.controller.AttributeKey;
 import by.zercomp.application.controller.JspPath;
 import by.zercomp.application.controller.RequestParam;
 import by.zercomp.application.controller.command.ActionCommand;
@@ -35,10 +35,10 @@ public class LogInCommand implements ActionCommand {
         try {
             Optional<User> user = service.signIn(login, password);
             if (user.isPresent()) {
-                session.setAttribute(AttributeName.ROLE_NAME, user.get().getRole().name().toLowerCase());
-                session.setAttribute(AttributeName.LOGIN, user.get().getLogin());
+                session.setAttribute(AttributeKey.ROLE_NAME, user.get().getRole().name().toLowerCase());
+                session.setAttribute(AttributeKey.LOGIN, user.get().getLogin());
             } else {
-                request.setAttribute(AttributeName.ERROR, true);
+                request.setAttribute(AttributeKey.ERROR, true);
                 router.setForward(JspPath.SIGN_IN);
             }
         } catch (ServiceException e) {

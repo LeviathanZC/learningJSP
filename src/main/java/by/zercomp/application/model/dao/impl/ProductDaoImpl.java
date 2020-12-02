@@ -9,6 +9,7 @@ import by.zercomp.application.model.entity.Product;
 import by.zercomp.application.model.exception.DaoException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
@@ -48,7 +49,7 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
 
     @Override
     public void addProduct(Product product) throws DaoException {
-        executeUpdate(ADD_PRODUCT, product.getId(), product.getName(), product.getCategory().getId(),
+        executeUpdate(ADD_PRODUCT, (int)productParams.getId(), product.getName(), product.getCategory().getId(),
                 product.getDescription(), product.getPrice(), product.getBrand().getId(), product.getQuantity());
     }
 
@@ -58,9 +59,9 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
     }
 
     @Override
-    public void updateProduct(Product product) throws DaoException {
-        executeUpdate(UPDATE_INFO, product.getName(), product.getCategory().getId(), product.getDescription(),
-                                    product.getPrice(), product.getBrand().getId(), product.getQuantity(), product.getId());
+    public void updateProduct(Map<String, String> productParams) throws DaoException {
+        executeUpdate(UPDATE_INFO, productParams.getName(), productParams.getCategory().getId(), productParams.getDescription(),
+                                    productParams.getPrice(), productParams.getBrand().getId(), productParams.getQuantity(), productParams.getId());
     }
 
     @Override

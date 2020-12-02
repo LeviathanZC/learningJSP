@@ -6,6 +6,7 @@ import by.zercomp.application.model.entity.Product;
 import by.zercomp.application.model.exception.ServiceException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ProductService {
@@ -16,7 +17,7 @@ public interface ProductService {
 
     List<Product> findByCategory(Category category) throws ServiceException;
 
-    void add(Product product) throws ServiceException;
+    void add(Map<String, String> productParams) throws ServiceException;
 
     void update(Product product, int id) throws ServiceException;
 
