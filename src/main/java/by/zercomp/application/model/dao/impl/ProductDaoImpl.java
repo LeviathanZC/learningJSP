@@ -34,6 +34,11 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
     private static final String REMOVE_PRODUCT = "DELETE FROM products WHERE product_id = ?";
     private static final String UPDATE_INFO = "UPDATE products SET products.name = ?, category_id = ?, " +
             "products.description = ?, price = ?, brand_id = ?, quantity = ? WHERE product_id = ?;";
+    private static final String FIND_IN_RANGE = "SELECT product_id, products.name, products.category_id, " +
+            "products.description, price, products.brand_id, quantity, " +
+            "brands.brand_name, category_name, category_desc FROM products " +
+            "JOIN brands ON products.brand_id = brands.brand_id " +
+            "JOIN categories ON products.category_id = categories.category_id WHERE price >= ? AND price <= ?";
 
     public ProductDaoImpl() {
         super(new ProductBuilder());
@@ -73,16 +78,7 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
 
     @Override
     public List<Product> findInPriceRange(int minPrice, int maxPrice) throws DaoException {
-        return null;
+        return executeQuery(FIND_IN_RANGE, minPrice, maxPrice);
     }
 
-    @Override
-    public void addProductQuantity(long id, int quantity) throws DaoException {
-
-    }
-
-    @Override
-    public void subProductQuantity(long id, int quantity) throws DaoException {
-
-    }
 }
