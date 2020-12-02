@@ -63,6 +63,38 @@ public class GenericDao<T extends Identifiable> {
         }
     }
 
+    protected void executeCall(String query, Connection connection, Object... params) throws DaoException {
+        CallableStatement cs = null;
+        try {
+            cs = connection.prepareCall(query);
+            setCallable(cs, params);
+            cs.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("cannot call or execute stored procedure : ", e);
+        } finally {
+            closeResource(cs);
+        }
+    }
+
+    protected void executeCall(String query, Object... params) throws DaoException {
+        Connection connection = pool.getConnection();
+        try {
+            executeCall(query, connection, params);
+        } finally {
+            pool.releaseConnection(connection);
+        }
+    }
+
+    protected void setCallable(CallableStatement callable, Object... params) throws SQLException {
+        for (int i = 0, paramIndex = 1; i < params.length; i++, paramIndex++) {
+            if (params[i] != null) {
+                callable.setObject(paramIndex, params[i]);
+            } else {
+                callable.setNull(paramIndex, Types.NULL);
+            }
+        }
+    }
+
     protected void setParameters(PreparedStatement preparedStatement, Object... params) throws SQLException {
         for (int i = 0, paramIndex = 1; i < params.length; i++, paramIndex++) {
             if (params[i] != null) {
@@ -157,7 +189,7 @@ public class GenericDao<T extends Identifiable> {
             throws DaoException {
         Connection connection = pool.getConnection();
         try {
-            return (boolean)findObject(query, connection, columnName, params).orElseThrow(DaoException::new);
+            return (boolean) findObject(query, connection, columnName, params).orElseThrow(DaoException::new);
         } finally {
             pool.releaseConnection(connection);
         }

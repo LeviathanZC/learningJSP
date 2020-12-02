@@ -39,6 +39,8 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
             "brands.brand_name, category_name, category_desc FROM products " +
             "JOIN brands ON products.brand_id = brands.brand_id " +
             "JOIN categories ON products.category_id = categories.category_id WHERE price >= ? AND price <= ?";
+    private static final String CHANGE_QNT_PROC = "CALL addQuantity(?,?)";
+
 
     public ProductDaoImpl() {
         super(new ProductBuilder());
@@ -81,4 +83,8 @@ public class ProductDaoImpl extends GenericDao<Product> implements ProductDao {
         return executeQuery(FIND_IN_RANGE, minPrice, maxPrice);
     }
 
+    @Override
+    public void changeQuantity(long id, int amount) throws DaoException {
+        executeCall(CHANGE_QNT_PROC, id, amount);
+    }
 }

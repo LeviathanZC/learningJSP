@@ -23,13 +23,5 @@
     <url-pattern>/signIn</url-pattern>
   </servlet-mapping>
 
-  <jsp-config>
-    <jsp-property-group>
-      <url-pattern>*.jsp</url-pattern>
-      <el-enabled>true</el-enabled>
-      <scripting-enabled>true</scripting-enabled>
-    </jsp-property-group>
-  </jsp-config>
-
 </web-app>
 

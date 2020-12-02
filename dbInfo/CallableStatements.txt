@@ -1,0 +1,10 @@
+DELIMITER //
+
+CREATE PROCEDURE `addQuantity` (IN productId INT, IN quantity INT)
+LANGUAGE SQL
+SQL SECURITY DEFINER
+COMMENT 'Add quantity for product without Java code'
+BEGIN
+	UPDATE products SET products.quantity = products.quantity + quantity WHERE product_id = productId;
+END//
+
