@@ -24,21 +24,7 @@ public class RequestController extends HttpServlet {
     }
 
     private void processing(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        Optional<User> user = ServiceFactory.getInstance().getUserService().signIn(login, password);
-        if (user.isPresent()) {
-            HttpSession session = request.getSession();
-            session.setAttribute("userId", user.get().getId());
-            session.setAttribute("userRole", user.get().getRole());
-            response.sendRedirect("https://vk.com");
-            System.out.println("google");
-        } else {
-            request.setAttribute("error", "Неверный логин или пароль.");
-            request.getRequestDispatcher("/WEB-INF/pages/auth/signIn.jsp").forward(request, response);
-            System.out.println("givni");
-        }
-        System.out.println("geere");
+
     }
 
     /*
