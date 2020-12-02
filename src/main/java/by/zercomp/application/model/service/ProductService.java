@@ -16,8 +16,6 @@ public interface ProductService {
 
     List<Product> findByCategory(Category category) throws ServiceException;
 
-    List<Product> findByName(String name) throws ServiceException;
-
     void add(Product product) throws ServiceException;
 
     void update(Product product, int id) throws ServiceException;
