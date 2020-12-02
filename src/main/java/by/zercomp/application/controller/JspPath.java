@@ -16,4 +16,5 @@ public class JspPath {
     public static final String MANAGEMENT = "/WEB-INF/pages/admin/goodsManagement.jsp";
 
 
+
 }
