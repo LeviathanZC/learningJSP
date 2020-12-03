@@ -1,5 +1,6 @@
 package by.zercomp.application.model.validator;
 
+import by.zercomp.application.controller.RequestParam;
 import by.zercomp.application.model.service.DTMapKey;
 import by.zercomp.application.model.service.ErrorMsg;
 
@@ -14,7 +15,8 @@ public class UserValidator {
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
             "(?=.*[@#$%^&-+=()])(?=\\\\S+$).{8,20}$");
 
-    private UserValidator() {}
+    private UserValidator() {
+    }
 
     public static UserValidator getInstance() {
         return instance;
@@ -42,6 +44,16 @@ public class UserValidator {
         return true;
     }
 
+    public boolean defineIncorrect(Map<String, String> signUpData) {
+        for (String key : signUpData.keySet()) {
+            if(signUpData.get(key).isEmpty() || signUpData.get(key).equals(RequestParam.NOT_UNIQUE)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     private boolean checkName(String potential, Map<String, String> signUpData, String error) {
         if (potential == null || !NAME_PATTERN.matcher(potential).matches()) {
             signUpData.put(error, ErrorMsg.NAME.toString());
@@ -67,4 +79,6 @@ public class UserValidator {
         }
         return true;
     }
+
+
 }

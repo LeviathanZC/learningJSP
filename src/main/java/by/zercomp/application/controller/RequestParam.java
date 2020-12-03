@@ -5,14 +5,19 @@ public class RequestParam {
     /*COMMON*/
     public static final String LOCALE = "locale";
     public static final String PAGE = "page";
+    public static final String ID = "id";
     public static final String COMMAND = "command";
 
-
-    /*User*/
+    /*USER*/
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
     public static final String EMAIL = "email";
     public static final String PHONE = "phone";
+    public static final String OLD_PW = "oldPassword";
+    public static final String REPEAT_PW = "repeatPassword";
+    public static final String FIRST_NAME = "firstName";
+    public static final String LAST_NAME = "lastName";
+    public static final String BIRTH = "birth";
 
     /*PRODUCTS*/
     public static final String PRODUCTS = "products";
@@ -29,8 +34,8 @@ public class RequestParam {
     /*SIGN_UP*/
     public static final String NOT_UNIQUE = "notUnique";
     public static final String LOGIN_UNIQUE = "loginUnique";
-    public static final String PHONE_UNIQUE = "phoneUnique";
     public static final String EMAIL_UNIQUE = "emailUnique";
+    public static final String PHONE_UNIQUE = "phoneUnique";
 
 
 }

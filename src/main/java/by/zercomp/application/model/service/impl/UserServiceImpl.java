@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         Map<String, String> checkedData = new HashMap<>();
         String login = data.get(DTMapKey.LOGIN);
         String email = data.get(DTMapKey.EMAIL);
-        String phone = data.get(DTMapKey.PHONE);
+        //  String phone = data.get(DTMapKey.PHONE);
         if (UserValidator.getInstance().checkSignUpData(data)) {
             try {
                 checkedData.put(LOGIN_UNIQUE, userDao.findByLogin(login).isPresent() ? NOT_UNIQUE : login);

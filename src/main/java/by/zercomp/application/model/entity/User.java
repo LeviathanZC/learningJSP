@@ -22,6 +22,10 @@ public class User extends Identifiable {
         this.birth = birth;
     }
 
+    public User(String login, String email, String firstName, String lastName) {
+        this(login, email, firstName, lastName, null);
+    }
+
     public Role getRole() {
         return role;
     }

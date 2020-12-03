@@ -46,6 +46,8 @@ public class UserDaoImpl extends GenericDao<User> implements UserDao {
         return executeForSingle(FIND_BY_EMAIL, email);
     }
 
+    //TODO add method findByPhone()
+
     @Override
     public Optional<String> findPasswordByLogin(String login) throws DaoException {
         return findString(FIND_PASSWORD_BY_LOGIN, ColumnName.PASSWORD, login);
