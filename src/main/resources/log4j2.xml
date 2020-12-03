@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <RollingFile name="FileRolling" fileName="../logs/online_market.log" append="true" filePattern=
+                "log/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log">
+            <PatternLayout pattern="[%p] [%d{DATE}] [%c{1}] %M - %m%n."/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="15 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="FileRolling"/>
+        </Root>
+    </Loggers>
+</Configuration>
