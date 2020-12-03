@@ -10,6 +10,8 @@ public interface UserService {
 
     Optional<String> signUp(User user, String password) throws ServiceException;
 
+    Map<String, String> checkSignUpData(Map<String, String> data) throws ServiceException;
+
     Optional<User> signIn(String login, String password) throws ServiceException;
 
     Optional<User> findById(long id) throws ServiceException;

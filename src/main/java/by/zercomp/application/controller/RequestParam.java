@@ -11,6 +11,8 @@ public class RequestParam {
     /*User*/
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String EMAIL = "email";
+    public static final String PHONE = "phone";
 
     /*PRODUCTS*/
     public static final String PRODUCTS = "products";
@@ -23,6 +25,12 @@ public class RequestParam {
     public static final String PRODUCT_BRAND = "product_brand";
     public static final String PRODUCT_CATEGORY = "product_category";
     public static final String PRODUCT_DESCR = "product_description";
+
+    /*SIGN_UP*/
+    public static final String NOT_UNIQUE = "notUnique";
+    public static final String LOGIN_UNIQUE = "loginUnique";
+    public static final String PHONE_UNIQUE = "phoneUnique";
+    public static final String EMAIL_UNIQUE = "emailUnique";
 
 
 }

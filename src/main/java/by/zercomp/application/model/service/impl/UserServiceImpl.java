@@ -11,8 +11,11 @@ import by.zercomp.application.model.service.UserService;
 import by.zercomp.application.model.validator.UserValidator;
 import by.zercomp.application.util.ProjectSecurity;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import static by.zercomp.application.controller.RequestParam.*;
 
 public class UserServiceImpl implements UserService {
 
@@ -33,6 +36,25 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Map<String, String> checkSignUpData(Map<String, String> data) throws ServiceException {
+        Map<String, String> checkedData = new HashMap<>();
+        String login = data.get(DTMapKey.LOGIN);
+        String email = data.get(DTMapKey.EMAIL);
+        String phone = data.get(DTMapKey.PHONE);
+        if (UserValidator.getInstance().checkSignUpData(data)) {
+            try {
+                checkedData.put(LOGIN_UNIQUE, userDao.findByLogin(login).isPresent() ? NOT_UNIQUE : login);
+                checkedData.put(EMAIL_UNIQUE, userDao.findByEmail(email).isPresent() ? NOT_UNIQUE : email);
+                //TODO Add findByPhone method to UserDao
+                //checkedData.put(PHONE_UNIQUE, userDao.findByPhone(phone).isEmpty() ? phone : NOT_UNIQUE);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return checkedData;
     }
 
     @Override
