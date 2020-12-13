@@ -5,6 +5,7 @@ public class JspPath {
     /*COMMON*/
     public static final String WELCOME = "/WEB-INF/pages/welcomePage.jsp";
 
+
     //AUTH
     public static final String SIGN_IN = "/WEB-INF/pages/auth/signIn.jsp";
     public static final String SIGN_UP = "/WEB-INF/pages/auth/signUp.jsp";
@@ -18,6 +19,8 @@ public class JspPath {
     public static final String BLACK_LIST = "/WEB-INF/pages/admin/blackList.jsp";
     public static final String MANAGEMENT = "/WEB-INF/pages/admin/goodsManagement.jsp";
 
+    /*TAGS*/
+    public static final String CATEGORIES = "/WEB-INF/tags/header.tag";
 
 
 }

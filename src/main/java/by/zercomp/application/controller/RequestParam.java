@@ -37,5 +37,9 @@ public class RequestParam {
     public static final String EMAIL_UNIQUE = "emailUnique";
     public static final String PHONE_UNIQUE = "phoneUnique";
 
+    /*CATEGORY*/
+    public static final String CATEGORY_ID = "category_id";
+    public static final String CATEGORY_NAME = "category_name";
+    public static final String CATEGORY_DESC = "category_desc";
 
 }

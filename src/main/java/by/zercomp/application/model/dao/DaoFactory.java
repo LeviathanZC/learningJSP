@@ -1,5 +1,6 @@
 package by.zercomp.application.model.dao;
 
+import by.zercomp.application.model.dao.impl.CategoryDaoImpl;
 import by.zercomp.application.model.dao.impl.ProductDaoImpl;
 import by.zercomp.application.model.dao.impl.UserDaoImpl;
 
@@ -9,6 +10,7 @@ public final class DaoFactory {
 
     private final UserDao userDao = new UserDaoImpl();
     private final ProductDao productDao = new ProductDaoImpl();
+    private final CategoryDao categoryDao = new CategoryDaoImpl();
 
     private DaoFactory() {
     }
@@ -24,11 +26,8 @@ public final class DaoFactory {
     public ProductDao getProductDao() {
         return productDao;
     }
-    /*
-     public Dao get___Dao() {
-        return ___Dao;
-     }
-     */
 
-
+    public CategoryDao getCategoryDao() {
+        return categoryDao;
+    }
 }
