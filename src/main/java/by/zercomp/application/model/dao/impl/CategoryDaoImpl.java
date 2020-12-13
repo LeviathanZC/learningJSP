@@ -16,6 +16,7 @@ public class CategoryDaoImpl extends GenericDao<Category> implements CategoryDao
 
     private static final String ADD_CATEGORY = "INSERT INTO categories(category_id, " +
             "category_name, category_desc) VALUES (?, ?, ?)";
+    private static final String REMOVE_CATEGORY = "DELETE FROM categories WHERE category_id = ?";
 
     public CategoryDaoImpl() { super(new CategoryBuilder()); }
 
@@ -28,7 +29,7 @@ public class CategoryDaoImpl extends GenericDao<Category> implements CategoryDao
 
     @Override
     public void remove(long id) throws DaoException {
-
+        executeUpdate(REMOVE_CATEGORY, id);
     }
 
     @Override
